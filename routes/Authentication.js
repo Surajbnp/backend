@@ -64,10 +64,10 @@ signupRoute.post("/login", async (req, res) => {
       });
     } else {
       await SignupModel.updateOne({ email }, { $set: { maxAttempt: val + 1 } });
-      if (val === 5) {
-        res.send({ msg: "user blocked", blockedTill: tommarow });
+      if (val >= 5) {
+        res.status(404).send({ msg: "user blocked", blockedTill: tommarow });
       } else {
-        res.send({ msg: "invalid credentials" });
+        res.status(400).send({ msg: "invalid credentials" });
       }
     }
   } else {

@@ -4,11 +4,9 @@ const app = express();
 const connection = require("./database/server");
 const { signupRoute } = require("./routes/Authentication");
 
-app.use(cors({
-  origin : "https://mycointab.netlify.app/",
-}));
 app.use(express.json());
 const PORT = process.env.PORT || 8080;
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("HomePage");
